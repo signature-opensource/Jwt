@@ -46,8 +46,8 @@ namespace JsonWebToken.Tests
             // Descriptor's header is preconfigured based on the ctor parameters.
             var descriptor = new JwsDescriptor(Jwk.None, SignatureAlgorithm.HS256);
             Assert.Equal(1, descriptor.Header.Count);
-            Assert.True(descriptor.Header.TryGetValue("alg", out var a) && a.Value.ToString() == "HS256");
-
+            Assert.True(descriptor.Header.ContainsKey( JwtHeaderParameterNames.Alg ));
+            
             // This doesn't compile and this is fine: Header is in "append" mode!
             // descriptor.Header = new JwtHeader();
 
@@ -57,8 +57,8 @@ namespace JsonWebToken.Tests
                 Header = new JwtHeader { { "One", "Member" } }
             };
             Assert.Equal(2, withInit.Header.Count);
-            Assert.True(withInit.Header.TryGetValue("alg", out var a2) && a2.Value.ToString() == "HS256");
-            Assert.True(withInit.Header.TryGetValue("One", out var m) && m.Value.ToString() == "Member");
+            Assert.True(withInit.Header.ContainsKey(JwtHeaderParameterNames.Alg));
+            Assert.True(withInit.Header.ContainsKey(System.Text.Json.JsonEncodedText.Encode("One")));
         }
 
     }
