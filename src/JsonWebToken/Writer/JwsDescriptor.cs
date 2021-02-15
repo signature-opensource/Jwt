@@ -72,6 +72,7 @@ namespace JsonWebToken
         public override JwtPayload Payload
         {
             get => _payload;
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
             set
             {
                 if (value is null)
@@ -80,6 +81,7 @@ namespace JsonWebToken
                 }
                 _payload = value;
             }
+#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
         }
 
         /// <summary>Gets the 'alg' header.</summary>
